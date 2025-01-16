@@ -40,3 +40,4 @@ rm archive.zip
 chmod +x uup_download_linux.sh
 ./uup_download_linux.sh
 find . -not -iname "*.iso" -not -path "." -not -path ".." -exec rm -rf {} +
+/info_creator.sh
