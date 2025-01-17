@@ -1,13 +1,19 @@
 #!/bin/bash
+if [ ! -d "/out" ]; then
+  echo "You need to mount a volume in the host to '/out'!"
+  exit 1
+fi
+
+if ! [[ "$BUILD" != "YES" ]]; then
+  echo "Not set to automatically build when starting container. Exiting..."
+  exit 0
+fi
+
 output="archive.zip"
 max_retries=5
 retry_delay=30
 attempt=1
 
-if [ ! -d "/out" ]; then
-  echo "You need to mount a volume in the host to '/out'!"
-  exit 1
-fi
 AUTODL=2
 EDITION=""
 if [[ "$HOME" == "YES" || "$HOMESINGLE" == "YES" ]]; then
@@ -75,7 +81,7 @@ if [[ "$ENTN" == "YES" ]]; then
     AUTODL=3
 fi
 
-cd /out
+cd /tmp
 update_id=$(curl -s "https://uupdump.net/fetchupd.php?arch=amd64&ring=retail" | xmllint --html --xpath '//code/text()' - 2>/dev/null | head -n 1)
 url="https://uupdump.net/get.php?id=${update_id}&pack=en-us&edition=${EDITION}"
 echo "Found object id for latest build: ${update_id}"
@@ -106,5 +112,7 @@ unzip -o ./archive.zip
 rm archive.zip 
 chmod +x uup_download_linux.sh
 ./uup_download_linux.sh
-find . -not -iname "*.iso" -not -path "." -not -path ".." -exec rm -rf {} +
+#find . -not -iname "*.iso" -not -path "." -not -path ".." -exec rm -rf {} +
 /info_creator.sh
+mv *.ISO /out
+mv image_info.txt /out
