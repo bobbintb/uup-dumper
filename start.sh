@@ -4,7 +4,7 @@ if [ ! -d "/out" ]; then
   exit 1
 fi
 
-if ! [[ "$BUILD" != "YES" ]]; then
+if [[ "$BUILD" != "YES" ]]; then
   echo "Not set to automatically build when starting container. Exiting..."
   exit 0
 fi
