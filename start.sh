@@ -28,51 +28,51 @@ EDITION="${EDITION%;}"
 VIRTUALEDITIONS=""
 if [[ "$HOMESINGLE" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=CoreSingleLanguage"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$PROFORWORK" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=ProfessionalWorkstation"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$PROEDU" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=ProfessionalEducation"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$EDU" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=Education"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$ENT" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=Enterprise"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$ENTMS" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=ServerRdsh"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$IOTENT" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=IoTEnterprise"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$IOTENTSUB" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=IoTEnterpriseK"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$PRONFORWORK" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=ProfessionalWorkstationN"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$PROEDUN" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=ProfessionalEducationN"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$EDUN" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=EducationN"
-	AUTODL=3
+    AUTODL=3
 fi
 if [[ "$ENTN" == "YES" ]]; then
     VIRTUALEDITIONS+="&virtualEditions[]=EnterpriseN"
-	AUTODL=3
+    AUTODL=3
 fi
 
 cd /out
@@ -81,6 +81,7 @@ url="https://uupdump.net/get.php?id=${update_id}&pack=en-us&edition=${EDITION}"
 echo "Found object id for latest build: ${update_id}"
 
 while [ $attempt -le $max_retries ]; do
+  echo "Editions included in ISO: ${EDITION} ${VIRTUALEDITIONS}"
   response=$(curl -s -w "%{http_code}" -o "$output" "$url" --data-raw 'autodl=${AUTODL}&updates=1&cleanup=1${VIRTUALEDITIONS}')
   status_code="${response: -3}"
 
