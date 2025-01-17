@@ -81,7 +81,8 @@ if [[ "$ENTN" == "YES" ]]; then
     AUTODL=3
 fi
 
-cd /tmp
+mkdir -p /out/working
+cd /out/working
 update_id=$(curl -s "https://uupdump.net/fetchupd.php?arch=amd64&ring=retail" | xmllint --html --xpath '//code/text()' - 2>/dev/null | head -n 1)
 url="https://uupdump.net/get.php?id=${update_id}&pack=en-us&edition=${EDITION}"
 echo "Found object id for latest build: ${update_id}"
@@ -116,3 +117,5 @@ chmod +x uup_download_linux.sh
 /info_creator.sh
 mv *.ISO /out
 mv image_info.txt /out
+cd ..
+rm -dr ./working
