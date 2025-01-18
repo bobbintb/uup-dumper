@@ -89,7 +89,7 @@ echo "Found object id for latest build: ${update_id}"
 
 while [ $attempt -le $max_retries ]; do
   echo "Editions included in ISO: ${EDITION} ${VIRTUALEDITIONS}"
-  response=$(curl -s -w "%{http_code}" -o "$output" "$url" --data-raw 'autodl=${AUTODL}&updates=1&cleanup=1${VIRTUALEDITIONS}')
+  response=$(curl -s -w "%{http_code}" -o "$output" "$url" --data-raw "autodl=${AUTODL}&updates=1&cleanup=1${VIRTUALEDITIONS}")
   status_code="${response: -3}"
 
   if [ "$status_code" -eq 200 ]; then
