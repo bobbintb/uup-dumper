@@ -86,6 +86,7 @@ cd /out/working
 update_id=$(curl -s "https://uupdump.net/fetchupd.php?arch=amd64&ring=retail" | xmllint --html --xpath '//code/text()' - 2>/dev/null | head -n 1)
 url="https://uupdump.net/get.php?id=${update_id}&pack=en-us&edition=${EDITION}"
 echo "Found object id for latest build: ${update_id}"
+sleep 5
 
 while [ $attempt -le $max_retries ]; do
   echo "Editions included in ISO: ${EDITION} ${VIRTUALEDITIONS}"
