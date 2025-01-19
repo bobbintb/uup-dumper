@@ -117,5 +117,6 @@ chmod +x uup_download_linux.sh
 #find . -not -iname "*.iso" -not -path "." -not -path ".." -exec rm -rf {} +
 mv *.ISO /out
 cd ..
+echo "Generating checksums..."
 /info_creator.sh /out/*.ISO
 rm -dr ./working
