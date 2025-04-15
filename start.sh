@@ -116,6 +116,7 @@ chmod +x uup_download_linux.sh
 ./uup_download_linux.sh
 #find . -not -iname "*.iso" -not -path "." -not -path ".." -exec rm -rf {} +
 mv *.ISO /out
+build=$(curl -s "https://uupdump.net/fetchupd.php?arch=amd64&ring=retail" | xmllint --html --xpath '(//div[contains(@class,"sub header")])[1]/text()' - 2>/dev/null | sed 's/^.*Build number: //')
 cd ..
 echo "Generating checksums..."
 /info_creator.sh /out/*.ISO
